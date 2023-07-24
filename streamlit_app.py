@@ -2,7 +2,8 @@
 import streamlit
 streamlit.title('......Dinner Time')
 streamlit.header('Menu')
-streamlit.text('Dosey')
-streamlit.text('Uppittu')
+streamlit.text('🥣  Dosey')
+streamlit.text('🥗 Uppittu')
+streamlit.text('🥑🍞 Avocado Toast')
                 
                  
