@@ -50,14 +50,13 @@ except URLError as e:
 
 #streamlit.stop()
 
-
+my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 streamlit.text("Hello from Snowflake:")
 # display as text.. as it is
 #streamlit.text(my_data_row)
 # display as DataFrame
 if streamlit.button('Load Fruit List'):
   
-  my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   my_data_rows = get_fruit_load_list()
   streamlit.dataframe( my_data_rows)
                     
