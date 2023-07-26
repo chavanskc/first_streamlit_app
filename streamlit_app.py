@@ -40,6 +40,9 @@ streamlit.text("Hello from Snowflake:")
 # display as DataFrame
 streamlit.dataframe(my_data_row)
 
+add_fruit = streamlit.text_input('Add a Fruit')
+streamlit.text(add_fruit)
+
 
                 
                  
