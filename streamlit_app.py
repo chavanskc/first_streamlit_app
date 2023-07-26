@@ -66,6 +66,7 @@ add_fruit = streamlit.text_input('Add a Fruit')
 streamlit.text(add_fruit)
 query_insert = "insert into PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST values ('{fruit_entered}')"
 query_insert = query_insert.format(fruit_entered = add_fruit)
+streamlit.text(query_insert)
 my_cur.execute(query_insert)
 
 
