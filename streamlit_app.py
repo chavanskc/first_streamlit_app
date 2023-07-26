@@ -13,6 +13,13 @@ def get_fruityvice_data(this_fruit_choice):
   fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
   # write your own comment - what does this do? Show as table (Data Frame)
   return fruityvice_normalized
+  
+def get_fruit_load_list():
+  my_cur = my_cnx.cursor()
+  #my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+  my_cur.execute("SELECT * from fruit_load_list")
+  my_data_row = my_cur.fetchall()
+  return my_data_row
 
 streamlit.title('......Dinner Time')
 streamlit.header('Menu')
@@ -37,20 +44,23 @@ try:
   else:
     streamlit.dataframe(get_fruityvice_data(fruit_choice))
     
+    
 except URLError as e:
   streamlit.error()
 
 streamlit.stop()
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-#my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
-my_cur.execute("SELECT * from fruit_load_list")
-my_data_row = my_cur.fetchall()
+
+
 streamlit.text("Hello from Snowflake:")
 # display as text.. as it is
 #streamlit.text(my_data_row)
 # display as DataFrame
-streamlit.dataframe(my_data_row)
+if streamlit.button('Load Fruit List):
+  my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+  my_data_rows = get_fruit_load_list()
+  streamlit.dataframe( my_data_rows)
+                    
+#streamlit.dataframe(my_data_row)
 
 add_fruit = streamlit.text_input('Add a Fruit')
 streamlit.text(add_fruit)
